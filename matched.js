@@ -7,6 +7,6 @@ const products = [
   { id: 6, name: "xiaomi phone6", price: 19006 },
 ];
 
-for (const product of product) {
+for (const product of products) {
   console.log(product);
 }
