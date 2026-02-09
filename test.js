@@ -1,189 +1,148 @@
 function calculateMoney(ticketSale) {
+  // Invalid number message.
 
-// Invalid number message.
+  if (ticketSale < 0) {
+    return "Invalid Number";
+  }
 
-if (ticketSale < 0) {
+  // The income from the sale of tickets.
 
-return "Invalid Number"
+  let incomeFromTicketSale = ticketSale * 120;
 
-}
+  // Total expense
 
-// The income from the sale of tickets.
+  const SecurityGuardCost = 500;
 
-let incomeFromTicketSale = ticketSale * 120;
+  const lunchCostPerStaff = 50;
 
+  const totalLunchCost = 8 * lunchCostPerStaff;
 
-// Total expense
+  // Calculate the amount of money that remains after deducting the expenses.
 
-const SecurityGuardCost = 500;
+  let remainingProfit =
+    incomeFromTicketSale - (SecurityGuardCost + totalLunchCost);
 
-const lunchCostPerStaff = 50;
-
-const totalLunchCost = 8 * lunchCostPerStaff;
-
-
-// Calculate the amount of money that remains after deducting the expenses.
-
-let remainingProfit = incomeFromTicketSale - (SecurityGuardCost + totalLunchCost);
-
-
-return remainingProfit;
-
+  return remainingProfit;
 }
 
 function checkName(name) {
+  // Verify whether the name is a string or not.
 
-// Verify whether the name is a string or not.
+  if (typeof name !== "string") {
+    return "invalid";
+  }
 
-if (typeof name !== 'string') {
+  // Define an array of good letter.
 
-return "invalid";
+  const goodLetter = ["A", "y", "i", "e", "o", "u", "w"];
 
-}
+  // Get the last letter of the name (converted to lowercase)
 
-// Define an array of good letter.
+  const lastLetterWithLowerCase = name[name.length - 1].toLowerCase();
 
-const goodLetter = ['A', 'y', 'i' , 'e' , 'o' , 'u', 'w'];
+  // Last letter based condition.
 
-// Get the last letter of the name (converted to lowercase)
-
-const lastLetterWithLowerCase = name[name.length - 1].toLowerCase();
-
-// Last letter based condition.
-
-if (goodLetter.includes(lastLetterWithLowerCase)) {
-
-return "Good Name";
-
-}
-
-else {
-
-return "Bad Name";
-
-}
-
+  if (goodLetter.includes(lastLetterWithLowerCase)) {
+    return "Good Name";
+  } else {
+    return "Bad Name";
+  }
 }
 
 function deleteInvalids(array) {
+  // Checking input is an array or not.
 
-// Checking input is an array or not.
+  if (!Array.isArray(array)) {
+    return "Invalid Array";
+  }
 
-if (!Array.isArray(array)) {
+  // Initialize an empty array to store valid numbers
 
-return "Invalid Array";
+  const validNumbers = [];
 
-}
+  // Loop through the given array.
 
-// Initialize an empty array to store valid numbers
+  for (let i = 0; i < array.length; i++) {
+    // Checking a valid number
 
-const validNumbers = [];
+    if (typeof array[i] === "number" && !isNaN(array[i])) {
+      validNumbers.push(array[i]);
+    }
+  }
 
-// Loop through the given array.
-
-for (let i = 0; i < array.length; i++) {
-
-// Checking a valid number
-
-if (typeof array[i] === 'number' && !isNaN(array[i])) {
-
-validNumbers.push(array[i]);
-
-}
-
-}
-
-return validNumbers;
-
+  return validNumbers;
 }
 
 function password(obj) {
+  // Checking objects and four digits birth year.
 
-// Checking objects and four digits birth year.
+  // Objects
 
-// Objects
+  if (
+    typeof obj !== "object" ||
+    !obj.hasOwnProperty("name") ||
+    !obj.hasOwnProperty("birthYear") ||
+    !obj.hasOwnProperty("siteName")
+  ) {
+    return "invalid";
+  }
 
-if (typeof obj !== 'object' || !obj.hasOwnProperty('name') || !obj.hasOwnProperty('birthYear') || !obj.hasOwnProperty('siteName')) {
+  // Birth Year
 
-return "invalid";
+  let birthYearStr = obj.birthYear.toString();
 
-}
+  if (birthYearStr.length !== 4) {
+    return "invalid";
+  }
 
-// Birth Year
+  // Capitalize the first letter of siteName
 
-let birthYearStr = obj.birthYear.toString();
+  var siteNameCapitalized =
+    obj.siteName.charAt(0).toUpperCase() + obj.siteName.slice(1);
 
-if (birthYearStr.length !== 4) {
+  // Construct the password string
 
-return "invalid";
+  var passStr = siteNameCapitalized + "#" + obj.name + "@" + birthYearStr;
 
-}
-
-
-// Capitalize the first letter of siteName
-
-var siteNameCapitalized = obj.siteName.charAt(0).toUpperCase() + obj.siteName.slice(1);
-
-// Construct the password string
-
-var passStr = siteNameCapitalized + '#' + obj.name + '@' + birthYearStr;
-
-return passStr;
-
+  return passStr;
 }
 
 function monthlySavings(arr, livingCost) {
+  // Checking input is valid or not.
 
-// Checking input is valid or not.
+  if (!Array.isArray(arr) || typeof livingCost !== "number") {
+    return "invalid input";
+  }
 
-if (!Array.isArray(arr) || typeof livingCost !== 'number') {
+  // Apply 20% deduction to amounts exceeding 3000
 
-return "invalid input";
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] >= 3000) {
+      arr[i] -= arr[i] * 0.2;
+    }
+  }
 
-}
+  // Total earning.
 
-// Apply 20% deduction to amounts exceeding 3000
+  let totalEarning = 0;
 
-for (let i = 0; i <arr.length; i++) {
+  for (let n = 0; n < arr.length; n++) {
+    totalEarning += arr[n];
+  }
 
-if (arr[i] >= 3000) {
+  // calculate the amount of money that will be saved after deducting taxes and living expenses.
 
-arr[i] -= arr[i] * 0.20;
+  let savings;
 
-}
+  if (totalEarning >= 3000) {
+    savings = totalEarning - livingCost;
+  }
 
-}
+  // Check if savings is 0 or more
 
-// Total earning.
-
-let totalEarning = 0;
-
-for (let n = 0; n < arr.length; n++) {
-
-totalEarning += arr[n];
-
-}
-
-// calculate the amount of money that will be saved after deducting taxes and living expenses.
-
-let savings;
-
-if (totalEarning >= 3000) {
-
-savings = totalEarning - livingCost;
-
-}
-
-// Check if savings is 0 or more
-
-if (savings >= 0) {
-
-return savings;
-
-} else {
-
-return "earn more";
-
-}
-
+  if (savings >= 0) {
+    return savings;
+  } else {
+    return "earn more";
+  }
 }
